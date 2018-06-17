@@ -1,0 +1,39 @@
+
+
+<%include header%>
+
+<div class="card">
+
+
+<%  for(var i =0;i<newPost.length; i++){ %>
+
+
+
+
+<a href="<%= newPost[i]._id%>">
+<div class="smalldiv">
+    <h1 class="h">
+        <%= newPost[i].topic %>
+    </h1>
+
+    <h5 class="h">
+        <%=  newPost[i].createdAt   %>
+    </h5>
+    <p class="h">
+        <%=     newPost[i].description%>
+    </p>
+    <h2 class="h">
+        <%=     newPost[i].author%>
+    </h2>
+</div>
+</a>
+
+
+
+
+<%}%>
+</div>
+
+
+
+<%include footer%>

@@ -1,0 +1,34 @@
+<%include header%>
+
+
+
+<div class="smalldiv">
+    <h1 class="h">
+        <%= newPost.topic %>
+    </h1>
+
+    <h5 class="h">
+        <%=  newPost.createdAt   %>
+    </h5>
+    <p class="h">
+        <%=     newPost.description%>
+    </p>
+    <h2 class="h">
+        <%=     newPost.author%>
+    </h2>
+</div>
+
+<a href="/<%= newPost._id%>/editblogs"><button class="button2">Update</button></a>
+<form   action="/<%= newPost.id%>/delete" method="post" id="form">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit" value="Delete" class="button3">Delete</button>
+</form>
+
+
+
+
+
+
+
+
+<%include footer.ejs%>

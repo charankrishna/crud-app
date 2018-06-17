@@ -1,0 +1,25 @@
+<%include header%>
+
+
+<div class="container2">
+<form  action="/readpost" method="post" id="form">
+    <label for="topic">Topic</label>
+    <input type="text" placeholder="Topic" name="topic" id="topic" >
+    <label for="description">Description</label>
+    <textarea placeholder="Description" name="description" id="description" ></textarea>
+    <label for="author">Author</label>
+    <input type="text" placeholder="Author" name="author" id="author" >
+    <input type="submit" value="Add a Blog" >
+</form>
+</div>
+
+<script type="text/javascript">
+    var d = new Date();
+    document.getElementById("date").innerHTML = d;
+</script>
+
+
+
+
+
+<%include footer%>

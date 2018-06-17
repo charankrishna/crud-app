@@ -1,0 +1,18 @@
+<%include header%>
+
+
+<div class="container2">
+    <form   action="/update/<%= newPost._id%>" method="post" id="form">
+        <input type="hidden" name="_method" value="put">
+        <label for="topic">Topic</label>
+        <input type="text"  name="topic" id="topic" value=<%= newPost.topic%> >
+        <label for="description">Description</label>
+        <textarea placeholder="Description" name="description" id="description" ><%= newPost.description%></textarea>
+        <label for="author">Author</label>
+        <input type="text" placeholder="Author" name="author" id="author"  value="<%= newPost.author%>">
+        <input type="submit" value="Update" class="button2" >
+    </form>
+</div>
+
+
+<%include footer%>
