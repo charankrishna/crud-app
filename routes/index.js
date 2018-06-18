@@ -4,7 +4,7 @@ var router=express.Router();
 var db= require('../models/index');
 var post = db.Post;
 var methodOverride = require('method-override');
-var auth = require("../controllers/AuthController.js");
+var auth = require('../controllers/AuthController');
 
 
 
@@ -21,7 +21,27 @@ router.use(methodOverride(function (req, res) {
     }
 }))
 
-router.get('/Writepost',function (req,res) {
+
+// restrict index for logged in user only
+router.get('/', auth.home);
+
+// route to register page
+router.get('/register', auth.register);
+
+// route for register action
+router.post('/register', auth.doRegister);
+
+// route to login page
+router.get('/login', auth.login);
+
+// route for login action
+router.post('/login', auth.doLogin);
+
+// route for logout action
+router.get('/logout', auth.logout);
+
+
+router.get('/Writepost',auth.doLogin, function (req,res) {
     res.render('Writepost');
 });
 
@@ -81,7 +101,7 @@ router.get('/:id',function (req,res) {
 
 
 
-router.get('/:id/editblogs',function (req,res) {
+router.get('/:id/editblogs',auth.doLogin,function (req,res) {
     var id = req.params.id;
     console.log(id);
     db.Post.findById(id)
@@ -94,7 +114,7 @@ router.get('/:id/editblogs',function (req,res) {
         })
 });
 
-router.put('/update/:id' ,function(req,res){
+router.put('/update/:id', auth.doLogin,function(req,res){
 
     db.Post.findByIdAndUpdate({_id: req.params.id}, req.body)
         .then(function(newPost){
@@ -108,7 +128,7 @@ router.put('/update/:id' ,function(req,res){
 
 //delete post
 
-router.delete('/:id/delete', function(req,res){
+router.delete('/:id/delete', auth.doLogin, function(req,res){
     db.Post.remove({_id : req.params.id})
         .then(function(){
             res.redirect('/readpost');
@@ -121,22 +141,7 @@ router.delete('/:id/delete', function(req,res){
 
 
 
-// restrict index for logged in user only
-router.get('/', auth.home);
 
-// route to register page
-router.get('/register', auth.register);
 
-// route for register action
-router.post('/register', auth.doRegister);
-
-// route to login page
-router.get('/login', auth.login);
-
-// route for login action
-router.post('/login', auth.doLogin);
-
-// route for logout action
-router.get('/logout', auth.logout);
 
 module.exports = router;
